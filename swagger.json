@@ -1,0 +1,231 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Классификатор",
+    "description": "Классификатор",
+    "contact": {
+      "name": "Чермянинов Денис",
+      "email": "den4ikept11@gmail.com"
+    }
+  },
+  "host": "127.0.0.1:8080",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/list/": {
+      "get": {
+        "tags": [
+          "list"
+        ],
+        "summary": "Просмотр списка",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SucessListGet"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "list"
+        ],
+        "summary": "Добавить элемент в список",
+        "description": "",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Элемент который нужно добавить",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateElement"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationResult"
+            }
+          }
+        }
+      }
+    },
+    "/list/{element_id}": {
+      "get": {
+        "tags": [
+          "list"
+        ],
+        "summary": "Просмотр определенного списка",
+        "description": "",
+        "parameters": [
+          {
+            "name": "element_id",
+            "in": "path",
+            "description": "ID Списка",
+            "required": true,
+            "default": 0,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SucessListGet"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "list"
+        ],
+        "summary": "Редактирование элемента",
+        "description": "",
+        "parameters": [
+          {
+            "name": "element_id",
+            "in": "path",
+            "description": "ID Списка",
+            "required": true,
+            "default": 0,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Новые параметры элемента",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EditElement"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationResult"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "list"
+        ],
+        "summary": "Удаление элемента",
+        "description": "",
+        "parameters": [
+          {
+            "name": "element_id",
+            "in": "path",
+            "description": "ID Списка",
+            "required": true,
+            "default": 0,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EditElement": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Новое имя"
+        },
+        "parent_id": {
+          "type": "integer",
+          "description": "ID списка в который нужно переместить элемент"
+        }
+      }
+    },
+    "CreateElement": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название элемента"
+        },
+        "this_list": {
+          "type": "boolean",
+          "default": false,
+          "description": "Сделать элемент списком?"
+        },
+        "parent_id": {
+          "type": "integer",
+          "description": "Сделать элемет элементом конкретного списка",
+          "default": 0
+        }
+      }
+    },
+    "SucessListGet": {
+      "type": "object",
+      "properties": {
+        "res": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "integer",
+              "description": "Количество записей в списке"
+            },
+            "items": {
+              "type": "array",
+              "description": "Элементы списка",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "element_id (int)",
+                  "name (str)",
+                  "this_list (0, 1)"
+                ]
+              }
+            }
+          }
+        },
+        "err": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationResult": {
+      "type": "object",
+      "properties": {
+        "res": {
+          "type": "integer",
+          "description": "1 - Успех 0 - Ошибка. см. err",
+          "maximum": 1,
+          "minimum": 0
+        },
+        "err": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
