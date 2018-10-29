@@ -1,17 +1,12 @@
 # API для управления иерархическим списком (классификатором)
 
-Для запуска нужно установить docker
+Для запуска нужно установить docker-compose
 
-Собрать образ
+Собрать и запустить образ
 ```bash
-sudo docker build -t classis .
+sudo docker-compose up --build -d
 ```
-Запустить образ
+Для запуска образа (если он уже собран)
 ```bash
-sudo docker run -d -p 8080:5000 classis
-```
-Если просто остановить контейнер то изменения в БД не сохраняться.
-Чтобы их сохранить нужно выполнить команду
-```bash
-sudo docker commit CONTAINER_ID classis:latest
+sudo docker-compose up -d
 ```

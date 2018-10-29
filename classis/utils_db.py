@@ -5,7 +5,7 @@ from typing import Tuple
 
 from classis.utils import is_valid_name
 
-DATABASE_PATH = "database.sqlite"
+DATABASE_PATH = "db/database.sqlite"
 MAIN_TABLE_NAME = "MAIN_LIST"
 
 

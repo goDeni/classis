@@ -10,5 +10,6 @@ COPY classis ./classis
 
 RUN pip install --no-cache-dir -r requirements.txt
 RUN python3 ./setup.py install
+RUN mkdir ./db
 
 CMD ["python3", "./classis/cmd/main.py"]
