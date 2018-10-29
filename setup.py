@@ -7,9 +7,4 @@ setup(
     description='classis',
     packages=find_packages('.'),
     install_requires=['flask'],
-    entry_points={
-        'console_scripts': [
-            'list = classis.cmd.main:main',
-        ]
-    },
 )

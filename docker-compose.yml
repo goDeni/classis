@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  classis:
+    build:
+      ./
+    volumes:
+      - ./db/database.sqlite:/usr/src/app/db/database.sqlite
+    ports:
+      - 8080:5000

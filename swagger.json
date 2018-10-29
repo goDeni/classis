@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0",
-    "title": "Классификатор",
-    "description": "Классификатор",
+    "version": "1.1",
+    "title": "Иерархический список",
+    "description": "Управление API для иерерхического списка",
     "contact": {
       "name": "Чермянинов Денис",
       "email": "den4ikept11@gmail.com"
@@ -184,10 +184,13 @@
         }
       }
     },
+    "ItemInList": {
+      "description": "[element_id (int), element_name (string), this_list (bool)]"
+    },
     "SucessListGet": {
       "type": "object",
       "properties": {
-        "res": {
+        "response": {
           "type": "object",
           "properties": {
             "count": {
@@ -198,17 +201,12 @@
               "type": "array",
               "description": "Элементы списка",
               "items": {
-                "type": "string",
-                "enum": [
-                  "element_id (int)",
-                  "name (str)",
-                  "this_list (0, 1)"
-                ]
+                "$ref": "#/definitions/ItemInList"
               }
             }
           }
         },
-        "err": {
+        "error": {
           "type": "string"
         }
       }
@@ -216,13 +214,13 @@
     "OperationResult": {
       "type": "object",
       "properties": {
-        "res": {
+        "response": {
           "type": "integer",
           "description": "1 - Успех 0 - Ошибка. см. err",
           "maximum": 1,
           "minimum": 0
         },
-        "err": {
+        "error": {
           "type": "string"
         }
       }
